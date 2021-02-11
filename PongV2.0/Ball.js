@@ -97,15 +97,6 @@ function Ball(x, y, r, speed, acceleration)
         {
             P1_Score++;
             this.reset();
-            // to FIX : when resetting dx and dy are different than speed
-            // try to separate the calcul from the update function
-        }
-        if(P1_Score >= maxScore){
-            gameStart = false;
-            result.innerText = "Player One Win";
-        } else if ( P2_Score >= maxScore){
-            gameStart = false;
-            result.innerText = "Player Two Win";
         }
     }
 }

@@ -40,17 +40,18 @@ var secondNeon = 20;
 var neonColor = 0;
 var colorChange = 1;
 
-// I used this bit of a code and tweaked it for my game to calculate fps and lag
+// I used this bit of a code and tweaked it for my game to calculate frameRate and lag
 // https://stackoverflow.com/questions/25612452/html5-canvas-game-loop-delta-time-calculations/25628203
-var fps = 60; //Set the frame rate
+var frameRate = 120; //Set the frame rate
 var start; //Get the start time
 var current = 0;
 var elapsed = 0;
-var frameDuration = 1000 / fps; //Set the frame duration in milliseconds
+var frameDuration = 1000 / frameRate; //Set the frame duration in milliseconds
 var lag = 0; //Initialize the lag offset
 // I added this part to display frames while playing
 var second = 0;
 var frame = 0;
+var fps = 0;
 var pFrame = document.getElementById("frame");
 
 // Update the objects to :
@@ -58,9 +59,17 @@ var pFrame = document.getElementById("frame");
 // Detect collision
 function update()
 {
+    frame += 1;
     P1.update();
     P2.update();
     ball.update();
+    if(P1_Score >= maxScore){
+        gameStart = false;
+        result.innerText = "Player One Win";
+    } else if ( P2_Score >= maxScore){
+        gameStart = false;
+        result.innerText = "Player Two Win";
+    }
 }
 
 function resetGame()
@@ -96,6 +105,7 @@ function animateNeon()
 // frame in the canvas
 function render()
 {
+    fps += 1;
     animateNeon();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     scoreBoard.draw();
@@ -129,14 +139,6 @@ function UI()
 // I decided not to use lagOffset but maybe i'll try later
 function Pong()
 {
-    second += elapsed;
-    frame += 1;
-    if (second > 1000)
-    {
-        second -= 1000;
-        pFrame.innerText ="FPS : " + frame;
-        frame = 0;
-    }
     current = Date.now();
     elapsed = current - start;
     start = current;
@@ -145,6 +147,14 @@ function Pong()
     {  
         update();
         lag -= frameDuration;
+    }
+    second += elapsed;
+    if (second >= 1000)
+    {
+        second -= 1000;
+        pFrame.innerText ="Frame Rate : " + frame + " / FPS : " + fps;
+        frame = 0;
+        fps = 0;
     }
 }
 

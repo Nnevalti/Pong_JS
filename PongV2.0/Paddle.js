@@ -25,6 +25,7 @@ function playerPaddle(x, y, dy, width, height, isAI, clvl)
     {
         if (this.isAI)
         {
+            // Simple AI it just follow the ball with a clvl error marge
             if(this.y < 0)
                 this.y = 0;
             else if (this.y + this.height > canvas.height)

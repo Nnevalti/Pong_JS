@@ -48,26 +48,31 @@ function handleUIKeys(evt)
 {
     if (evt.keyCode == 13) // Enter
     {
+        // resetting start (var for frames)
         start = Date.now();
+        // reset Game Element to default
         resetGame();
+        // Set the bool gameStart to true
         gameStart = true;
     }
-    if (evt.keyCode == 96 ||evt.keyCode == 48) // 0
+    if (evt.keyCode == 96 ||evt.keyCode == 48) // 0 : NoP Game mode
     {
         P1.isAI = true;
         P2.isAI = true;
         noPlayer = true;
     }
-    else if (evt.keyCode == 97 || evt.keyCode == 49) // 1
+    else if (evt.keyCode == 97 || evt.keyCode == 49) // 1 : 1P Game mode
     {
         noPlayer = false;
         multiPlayer = false;
+        P1.isAI = false;
         P2.isAI = true;
     }
-    else if (evt.keyCode == 98 || evt.keyCode == 50) // 2
+    else if (evt.keyCode == 98 || evt.keyCode == 50) // 2 : 2P Game mode
     {
         noPlayer = false;
         multiPlayer = true;
+        P1.isAI = false;
         P2.isAI = false;
     }
 }
@@ -77,7 +82,7 @@ document.addEventListener('keydown', function(evt)
     if (gameStart)
     {
         handlePlayersKeysUp(evt);
-        if (evt.keyCode == 27) // Esc
+        if (evt.keyCode == 27) // Esc : quit the current game
         {
             resetGame();
             gameStart = false;

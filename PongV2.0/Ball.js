@@ -6,6 +6,7 @@ function Ball(x, y, r, speed, acceleration)
     this.y = y;
     this.r = r;
     this.speed = speed;
+    this.defaultSpeed = speed;
     this.acceleration = acceleration;
     this.velocity = {dx: speed, dy: speed};
 
@@ -35,10 +36,18 @@ function Ball(x, y, r, speed, acceleration)
 
     this.reset = function()
     {
+        // Get old direction before replacing the ball
+        let dir = (this.x < canvas.width/2) ? 1 : -1;
+        // Caculating angle in degrees cos(angleRad) and sin(angleRad)
+        let angle1 = this.velocity.dx / this.speed;
+        let angle2 = this.velocity.dy / this.speed;
+        // Replacing the ball in the center of the canvas
         this.x = canvas.width /2;
         this.y = canvas.height / 2;
-        this.velocity.dx *= -1;
-        this.speed = 4;
+        // resetting speed to default value
+        this.speed = this.defaultSpeed;
+        this.velocity.dx = dir * (ball.speed * angle1);
+        this.velocity.dy = ball.speed * angle2;
     }
 
     this.update = function()
@@ -74,9 +83,7 @@ function Ball(x, y, r, speed, acceleration)
             let dir = (this.x < canvas.width/2) ? 1 : -1;
             this.velocity.dx = dir *( ball.speed * Math.cos(angleRad));
             this.velocity.dy = ball.speed * Math.sin(angleRad);
-            console.log(this.velocity.dy, this.velocity.dx);
             this.speed += this.acceleration;
-            console.log(this.velocity.dy, this.velocity.dx);
         }
        
         // Goal Player two
@@ -90,6 +97,8 @@ function Ball(x, y, r, speed, acceleration)
         {
             P1_Score++;
             this.reset();
+            // to FIX : when resetting dx and dy are different than speed
+            // try to separate the calcul from the update function
         }
         if(P1_Score >= maxScore){
             gameStart = false;

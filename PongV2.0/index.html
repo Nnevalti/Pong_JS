@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML Canvas</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <style type="text/css">
+        body{
+            width: 100%;
+            height: 100vh;
+            background-color:black;
+            margin: 0;
+            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+            font-size: 1.5rem;
+            color: #eeeeee;
+            text-align: center;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        #pageHeader{
+            height: 20%;
+        }
+        #canvas{
+            background-color:black;
+            border: 3px white solid;
+            box-sizing: border-box;
+        }
+        div#selectMode{
+            width: 100%;
+            font-size: 1rem;
+        }
+        ul{
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <div id='pageHeader'>
+            <h1>Pong</h1>
+    </div>
+    <div id="result"></div>
+    <canvas id="canvas"></canvas>
+    <div id="selectMode">
+        <div>
+            <p>Choisissez un mode de jeu : </p>
+            <ul>
+                <li id="NoP">Touche 0: Aucun joueur</li>
+                <li id="1P">Touche 1 : Un joueur</li>
+                <li id="2P">Touche 2 : Deux joueurs</li>
+            </ul>
+        </div>
+        <div>
+            Appuyez sur entrée pour lancer le jeu.
+        </div>
+        <div><p id="frame">FPS : 0</p></div>
+    </div>
+    <script src="Draw.js"></script>
+    <script src="ScoreBoard.js"></script>
+    <script src="Net.js"></script>
+    <script src="Ball.js"></script>
+    <script src="Paddle.js"></script>
+    <script src="Keys.js"></script>
+    <script src="Pong.js"></script>
+</body>
+</html>
